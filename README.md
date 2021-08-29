@@ -6,6 +6,6 @@ Achieving cron locking on processes deployed on distributed systems (or scaled) 
 
 Simply run below command in your terminal
 ```bash
-docker-compose up --scale cronlock=2
+docker-compose up --scale cron_python_app_1=2 --scale cron_python_app_2=2
 ```
 

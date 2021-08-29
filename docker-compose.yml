@@ -4,11 +4,23 @@ services:
     image: redis
     ports:
     - "6379:6379"
-  cronlock:
-    image: bernardmcmanus/docker-cronlock
+  cron_python_app_1:
+    # image: bernardmcmanus/docker-cronlock
+    build: .
+    environment: 
+      - CRONLOCK_PREFIX="mylocks.app1."
     depends_on:
       - redis
     volumes:
-      - ./cronlock.conf:/etc/cronlock.conf
-      - ./init:/docker-cronlock-init.d
-      - ./crontab:/etc/crontab
+      # - ./python_app_1/requirements.txt:/requirements.txt
+      - ./python_app_1/app.py:/home/app.py
+  cron_python_app_2:
+    # image: bernardmcmanus/docker-cronlock
+    build: .
+    environment:
+      - CRONLOCK_PREFIX="mylocks.app2."
+    depends_on:
+      - redis
+    volumes:
+      # - ./python_app_2/requirements.txt:/requirements.txt
+      - ./python_app_2/app.py:/home/app.py
